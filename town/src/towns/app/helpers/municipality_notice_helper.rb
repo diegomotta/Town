@@ -1,0 +1,2 @@
+module MunicipalityNoticeHelper
+end

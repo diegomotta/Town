@@ -1,0 +1,2 @@
+module MunicipalityEventHelper
+end

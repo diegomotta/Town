@@ -1,0 +1,2 @@
+module SupermarketNoticesHelper
+end

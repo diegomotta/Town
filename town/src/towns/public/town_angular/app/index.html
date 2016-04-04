@@ -1,0 +1,156 @@
+<!doctype html>
+<html ng-app='townsApp' >
+<head>
+  <meta charset="utf-8">
+  <link href="lib/style.css" rel="stylesheet">
+
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/jquery/jquery-1.12.0.min.js"></script>   
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+  <script src="lib/angular/angular-animate.js"></script>
+  <script src="lib/angular/ui-bootstrap-tpls-1.1.2.min.js"></script>
+  <script src="lib/angular/angular-route.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <script src="common/module/app.js"></script>
+  <script src="common/controllers/controllers.js"></script>
+  <script src="common/services/factories.js"></script>
+
+</head>
+<body > 
+  <div ng-controller="myController" class="">
+    <br/>
+    <center></center>
+    <div ng-show="formVisibility" class="wrapper"> 
+      <h2>Añadir un pais</h2>
+      nombre del pais:<input type="text" ng-model="country.nombre">
+      <button ng-click="crearCountry()">Guardar</button>
+    </div>
+
+
+    <div>
+      <table class="table table-hover table-condensed table-striped">
+        <thead>
+          <tr>
+            <th>Id Pais</th>
+            <th>Nombre</th>
+            <th><button type="button" class="btn btn-primary" ng-click="ShowForm()">Agregar Pais</button></th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="country in countries">
+          <tr class="clickableRow" ng-click="selectTableRow($index, country.id)">
+            <td>{{country.id}}</td>
+            <td>{{country.name}}</td>
+
+          </tr>
+          <tr ng-show="!statesCollapse[$index]">
+            <td colspan="2">&nbsp;</td>
+            <td colspan="7">
+              <div>
+                <div>
+                  <table class="table table-hover table-condensed table-striped">
+                    <thead>
+                      <tr>
+
+                        <th>Id Ciudad</th>
+                        <th>Nombre Ciudad</th>
+                        <th><button type="button" class="btn btn-primary" ng-click="ShowFormState()"> Agregar ciudad</button></th>
+                      </tr>
+                      <tr>
+                        <div ng-show="formVisibilityState" class="wrapper">
+                         nombre del ciudad:<input type="text" ng-model="nameState">
+                         <button ng-click="createState(country.id,nameState)">Guardar</button>
+                       </div>
+                     </tr>
+                   </thead>
+                   <tbody ng-repeat="state in states">
+                    <tr  class="clickableRow" type="button" class="btn btn-primary" ng-click="selectTableRow2($index,country.id,state.id)">
+                      <td>{{state.id}}</td>
+                      <td>{{state.name}}</td>
+
+                    </tr>
+                    <tr ng-show="!collapseDeparments[$index]">
+                      <td>&nbsp;</td>
+                      <td colspan="6">
+                        <div>
+                          <div>
+                            <table class="table table-hover table-condensed table-striped">
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th>Id departamento</th>
+                                  <th>Nombre departamento</th>
+                                  <th><button type="button" class="btn btn-primary" ng-click="ShowFormDepartment()"> Agregar departamento</button></th>
+                                </tr>
+                                <tr>
+                                  <div ng-show="formVisibilityDepartment">
+                                   nombre del departamento:<input type="text" ng-model="nameDeparment">
+                                   <button type="button" class="btn btn-primary" ng-click="createDepartment(country.id, state.id, nameDeparment)">Guardar</button>
+                                 </div>
+                               </tr>                                                                       
+                             </thead>
+                             <tbody ng-repeat="department in departments">
+
+                                <tr  class="clickableRow" type="button" class="btn btn-primary" ng-click="selectTableRow3($index,country.id,state.id,department.id)">
+                                <td>{{department.id}}</td>
+                                <td>{{department.name}}</td>
+                              </tr>
+                              <tr ng-show="!townsCollapse[$index]">
+                                <td>&nbsp;</td>
+                                <td colspan="6">
+                                  <div>
+                                    <div>
+                                      <table class="table table-hover table-condensed table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th></th>
+                                            <th>Nombre Pueblo</th>
+                                            <th><button type="button" class="btn btn-primary" ng-click="ShowFormTown()"> Agregar Pueblo</button></th>
+                                          </tr>
+                                          <tr>
+                                            <div ng-show="formVisibilityTown">
+                                             nombre del pueblo:<input type="text" ng-model="nameTown">
+                                             <button type="button" class="btn btn-primary" ng-click="createTown(country.id, state.id, department.id,nameTown)">Guardar</button>
+                                           </div>
+                                         </tr>                                                                       
+                                       </thead>
+                                       <tbody>
+                                        <tr ng-repeat="town in towns">
+                                          <td>&nbsp;</td>
+                                          <td>{{town.id}}</td>
+                                          <td>{{town.name}}</td>
+
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>                                                                    
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- END TABLE -->
+
+</div> 
+</body>
+</html>

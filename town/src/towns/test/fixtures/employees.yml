@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  municipality_id: 1
+  person_id: 1
+  name: MyString
+  description: MyText
+
+two:
+  municipality_id: 1
+  person_id: 1
+  name: MyString
+  description: MyText
